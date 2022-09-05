@@ -1,0 +1,23 @@
+{
+    "name": "safegen",
+    "version": "1.0.0",
+    "description": "A safe password generator.",
+    "main": "source/index.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/JerimiahOfficial/SafeGen.git"
+    },
+    "author": "Jerimiah",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/JerimiahOfficial/SafeGen/issues"
+    },
+    "homepage": "https://github.com/JerimiahOfficial/SafeGen#readme",
+    "dependencies": {
+        "electron": "^20.1.1",
+        "electron-squirrel-startup": "^1.0.0"
+    }
+}
