@@ -63,8 +63,12 @@ header p {
 }
 
 main {
-    padding: 5px;
+    display: flex;
+    flex-direction: column;
+
     background-color: rgb(24, 24, 24);
+
+    font-size: 12px;
 }
 
 main input:first-of-type {
@@ -72,16 +76,14 @@ main input:first-of-type {
 }
 
 main input {
-    display: block;
-
     border: none;
     border-radius: 8px;
 
     background-color: rgb(40, 40, 40);
     color: rgb(255, 255, 255);
 
-    width: 100%;
     height: 30px;
+    margin: 5px;
 }
 
 main input:hover {
@@ -90,6 +92,11 @@ main input:hover {
 
 main input:active {
     background-color: rgb(56, 56, 56);
+}
+
+main div div {
+    display: flex;
+    flex-direction: column;
 }
 
 footer {

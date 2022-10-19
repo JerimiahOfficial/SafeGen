@@ -12,5 +12,5 @@ Generate.addEventListener('click', () => { ipcRenderer.send('Generate'); });
 Github.addEventListener('click', () => { ipcRenderer.send('Github'); });
 
 ipcRenderer.on('NewPassword', (event, arg) => {
-    Password.value = arg;
+  Password.value = arg;
 });
