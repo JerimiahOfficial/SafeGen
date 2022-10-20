@@ -3,10 +3,6 @@ const {
   app, ipcMain, BrowserWindow, shell,
 } = require('electron');
 
-if (require('electron-squirrel-startup')) {
-  app.quit();
-}
-
 const Settings = {
   Symbols: true,
   Numbers: true,

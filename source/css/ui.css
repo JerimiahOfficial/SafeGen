@@ -11,6 +11,7 @@ html body {
     font-size: 1em;
 
     user-select: none;
+    overflow: hidden;
 
     padding: 0;
     margin: 0;
