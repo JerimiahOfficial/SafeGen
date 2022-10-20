@@ -20,8 +20,8 @@ let window;
 function CreateWindow() {
   window = new BrowserWindow({
     title: 'SafeGen',
-    width: 600,
-    height: 400,
+    width: 400,
+    height: 276,
     setMenuBarVisibility: false,
     autoHideMenuBar: true,
     frame: false,
@@ -67,7 +67,6 @@ ipcMain.on('Generate', () => {
     ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
   ];
 
-  // Generate a password using the settings
   let Password = '';
 
   for (let i = 0; i < Settings.MaxPasswordLength; i += 1) {
@@ -84,10 +83,7 @@ ipcMain.on('Generate', () => {
     Password += CharacterSet[CharacterSetIndex][CharacterIndex];
   }
 
-  // make sure the password is the max length
   Password = Password.substring(0, Settings.MaxPasswordLength);
-
-  // Shuffle the password
   Password = Password.split('').sort(() => Math.random() - 0.5).join('');
 
   window.webContents.send('NewPassword', Password);
