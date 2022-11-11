@@ -1,7 +1,12 @@
+/* eslint-disable global-require */
 const path = require('path');
 const {
   app, ipcMain, BrowserWindow, shell,
 } = require('electron');
+
+if (require('electron-squirrel-startup')) {
+  app.quit();
+}
 
 const Settings = {
   Symbols: true,
@@ -17,7 +22,7 @@ function CreateWindow() {
   window = new BrowserWindow({
     title: 'SafeGen',
     width: 400,
-    height: 276,
+    height: 300,
     setMenuBarVisibility: false,
     autoHideMenuBar: true,
     frame: false,
@@ -47,7 +52,7 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
-ipcMain.on('Shutdown', () => {
+ipcMain.on('Exit', () => {
   app.quit();
 });
 
@@ -55,7 +60,7 @@ ipcMain.on('Hide', () => {
   window.minimize();
 });
 
-ipcMain.on('Generate', () => {
+ipcMain.on('Generate Password', () => {
   const PasswordCharacters = [
     ['!', '@', '#', '$', '%', '^', '&', '*'],
     ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
@@ -87,4 +92,8 @@ ipcMain.on('Generate', () => {
 
 ipcMain.on('Github', () => {
   shell.openExternal('https://github.com/JerimiahOfficial');
+});
+
+ipcMain.on('Setting', (setting, state) => {
+  Settings[setting] = state;
 });
