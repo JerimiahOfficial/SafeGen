@@ -1,5 +1,7 @@
 // Variables
 const inputs = document.querySelectorAll('input')
+const Textbox = document.getElementById('Password') as HTMLInputElement
+const PassLen = document.getElementById('PassLen') as HTMLElement
 
 // Event handler
 inputs.forEach((input) => {
@@ -10,10 +12,6 @@ inputs.forEach((input) => {
         switch (input.id) {
           case 'Generate':
             void window.api.generatePassword().then((password) => {
-              const Textbox = document.getElementById('Password') as HTMLInputElement
-
-              if (Textbox === null) return
-
               Textbox.value = password
             })
             break
@@ -28,6 +26,13 @@ inputs.forEach((input) => {
     case 'checkbox':
       input.addEventListener('change', () => {
         window.api.updateSettings(input.id, input.checked)
+      })
+      break
+
+    case 'range':
+      input.addEventListener('input', () => {
+        window.api.updateSettings(input.id, parseInt(input.value))
+        PassLen.innerHTML = `Password Length: ${input.value}`
       })
       break
 

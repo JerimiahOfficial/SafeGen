@@ -45,12 +45,23 @@ function CreateWindow (): void {
   })
 }
 
+// App Listeners
 app.on('ready', CreateWindow)
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
 
+// Handlers
+ipcMain.handle('Generate Password', () => {
+  const Password = 'Work in progress'
+
+  // TODO: Generate password
+
+  return Password
+})
+
+// Listeners
 ipcMain.on('Exit', () => {
   app.quit()
 })
@@ -60,16 +71,10 @@ ipcMain.on('Hide', () => {
   window.minimize()
 })
 
-ipcMain.handle('Generate Password', () => {
-  const Password = ''
-
-  return Password
-})
-
 ipcMain.on('Github', () => {
   void shell.openExternal('https://github.com/JerimiahOfficial')
 })
 
-ipcMain.on('Setting', (_event, setting: string, state: boolean) => {
+ipcMain.on('Setting', (_event, setting: string, state: boolean | number) => {
   Settings[setting] = state
 })
