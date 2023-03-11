@@ -1,5 +1,5 @@
+import { app, BrowserWindow, ipcMain, shell } from 'electron'
 import { join } from 'node:path'
-import { app, ipcMain, BrowserWindow, shell } from 'electron'
 
 type iSettings = Record<string, boolean | number>
 
