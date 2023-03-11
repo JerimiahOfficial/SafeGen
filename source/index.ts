@@ -40,6 +40,9 @@ function CreateWindow (): void {
   })
 }
 
+// Need to fix the Passthrough issue.
+app.disableHardwareAcceleration()
+
 // App Listeners
 app.on('ready', CreateWindow)
 
