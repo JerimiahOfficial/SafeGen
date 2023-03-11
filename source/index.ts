@@ -1,15 +1,10 @@
 import { app, BrowserWindow, ipcMain, shell } from 'electron'
 import { join } from 'node:path'
 
-type iSettings = Record<string, boolean | number>
-
-const Settings: iSettings = {
-  Symbols: true,
-  Numbers: true,
-  Uppercase: true,
-  Lowercase: true,
-  MaxPasswordLength: 32
-}
+const UpperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const LowerCase = 'abcdefghijklmnopqrstuvwxyz'
+const Numbers = '0123456789'
+const Symbols = '!@#$%^&*'
 
 let window: BrowserWindow | null
 
@@ -38,6 +33,7 @@ function CreateWindow (): void {
 
   window.once('ready-to-show', () => {
     window?.show()
+    window?.webContents.openDevTools()
   })
 
   window.on('closed', () => {
@@ -50,15 +46,6 @@ app.on('ready', CreateWindow)
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
-})
-
-// Handlers
-ipcMain.handle('Generate Password', () => {
-  const Password = 'Work in progress'
-
-  // TODO: Generate password
-
-  return Password
 })
 
 // Listeners
@@ -75,6 +62,17 @@ ipcMain.on('Github', () => {
   void shell.openExternal('https://github.com/JerimiahOfficial')
 })
 
-ipcMain.on('Setting', (_event, setting: string, state: boolean | number) => {
-  Settings[setting] = state
+// Handlers
+ipcMain.handle('Generate', (_event, length: number, Upper: boolean, Lower: boolean, Number: boolean, Symbol: boolean) => {
+  let Password = ''
+
+  while (Password.length < length) {
+    if (Upper) Password += UpperCase[Math.floor(Math.random() * UpperCase.length)]
+    if (Lower) Password += LowerCase[Math.floor(Math.random() * LowerCase.length)]
+    if (Number) Password += Numbers[Math.floor(Math.random() * Numbers.length)]
+    if (Symbol) Password += Symbols[Math.floor(Math.random() * Symbols.length)]
+  }
+
+  Password = Password.slice(0, length)
+  return Password.split('').sort(() => Math.random() - 0.5).join('')
 })

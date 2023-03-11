@@ -85,6 +85,8 @@ main input {
     border: none;
     border-radius: 8px;
 
+    outline: none;
+
     background-color: rgb(40, 40, 40);
     color: rgb(255, 255, 255);
 

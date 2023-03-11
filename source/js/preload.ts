@@ -2,19 +2,15 @@ import { contextBridge, ipcRenderer } from 'electron'
 
 export interface ContextBridgeApi {
   buttonEvent: (id: string) => void
-  updateSettings: (key: string, value: boolean | number) => void
-  generatePassword: () => Promise<string>
+  generatePassword: (length: number, Upper: boolean, Lower: boolean, Number: boolean, Symbol: boolean) => Promise<string>
 }
 
 const exposeApi: ContextBridgeApi = {
   buttonEvent: (id: string) => {
     ipcRenderer.send(id)
   },
-  updateSettings: (key: string, value: boolean | number) => {
-    ipcRenderer.send('Update Settings', key, value)
-  },
-  generatePassword: async () => {
-    return await ipcRenderer.invoke('Generate Password')
+  generatePassword: async (length: number, Upper: boolean, Lower: boolean, Number: boolean, Symbol: boolean) => {
+    return await ipcRenderer.invoke('Generate', length, Upper, Lower, Number, Symbol)
   }
 }
 

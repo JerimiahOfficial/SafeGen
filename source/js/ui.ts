@@ -1,7 +1,14 @@
 // Variables
 const inputs = document.querySelectorAll('input')
 const Textbox = document.getElementById('Password') as HTMLInputElement
-const PassLen = document.getElementById('PassLen') as HTMLElement
+const PassLen = document.getElementById('length') as HTMLInputElement
+const PassLenVal = document.getElementById('PassLen') as HTMLElement
+
+// Checkboxes
+const Uppercase = document.getElementById('Upper') as HTMLInputElement
+const Lowercase = document.getElementById('Lower') as HTMLInputElement
+const Numbers = document.getElementById('Number') as HTMLInputElement
+const Symbols = document.getElementById('Symbol') as HTMLInputElement
 
 // Event handler
 inputs.forEach((input) => {
@@ -9,30 +16,25 @@ inputs.forEach((input) => {
     case 'button':
     case 'image':
       input.addEventListener('click', () => {
-        switch (input.id) {
-          case 'Generate':
-            void window.api.generatePassword().then((password) => {
-              Textbox.value = password
-            })
-            break
-
-          default:
-            window.api.buttonEvent(input.id)
-            break
+        if (input.id === 'Generate') {
+          void window.api.generatePassword(
+            parseInt(PassLen.value),
+            Uppercase.checked,
+            Lowercase.checked,
+            Numbers.checked,
+            Symbols.checked
+          ).then((password) => {
+            Textbox.value = password
+          })
+        } else {
+          window.api.buttonEvent(input.id)
         }
-      })
-      break
-
-    case 'checkbox':
-      input.addEventListener('change', () => {
-        window.api.updateSettings(input.id, input.checked)
       })
       break
 
     case 'range':
       input.addEventListener('input', () => {
-        window.api.updateSettings(input.id, parseInt(input.value))
-        PassLen.innerHTML = `Password Length: ${input.value}`
+        PassLenVal.innerHTML = `Password Length: ${input.value}`
       })
       break
 
