@@ -67,10 +67,20 @@ ipcMain.handle('Generate', (_event, length: number, Upper: boolean, Lower: boole
   let Password = ''
 
   while (Password.length < length) {
-    if (Upper) Password += UpperCase[Math.floor(Math.random() * UpperCase.length)]
-    if (Lower) Password += LowerCase[Math.floor(Math.random() * LowerCase.length)]
-    if (Number) Password += Numbers[Math.floor(Math.random() * Numbers.length)]
-    if (Symbol) Password += Symbols[Math.floor(Math.random() * Symbols.length)]
+    switch (Math.floor(Math.random() * 4)) {
+      case 0:
+        if (Upper) Password += UpperCase[Math.floor(Math.random() * UpperCase.length)]
+        break
+      case 1:
+        if (Lower) Password += LowerCase[Math.floor(Math.random() * LowerCase.length)]
+        break
+      case 2:
+        if (Number) Password += Numbers[Math.floor(Math.random() * Numbers.length)]
+        break
+      case 3:
+        if (Symbol) Password += Symbols[Math.floor(Math.random() * Symbols.length)]
+        break
+    }
   }
 
   Password = Password.slice(0, length)
