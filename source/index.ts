@@ -33,7 +33,6 @@ function CreateWindow (): void {
 
   window.once('ready-to-show', () => {
     window?.show()
-    window?.webContents.openDevTools()
   })
 
   window.on('closed', () => {
@@ -69,16 +68,20 @@ ipcMain.handle('Generate', (_event, length: number, Upper: boolean, Lower: boole
   while (Password.length < length) {
     switch (Math.floor(Math.random() * 4)) {
       case 0:
-        if (Upper) Password += UpperCase[Math.floor(Math.random() * UpperCase.length)]
+        if (!Upper) continue
+        Password += UpperCase[Math.floor(Math.random() * UpperCase.length)]
         break
       case 1:
-        if (Lower) Password += LowerCase[Math.floor(Math.random() * LowerCase.length)]
+        if (!Lower) continue
+        Password += LowerCase[Math.floor(Math.random() * LowerCase.length)]
         break
       case 2:
-        if (Number) Password += Numbers[Math.floor(Math.random() * Numbers.length)]
+        if (!Number) continue
+        Password += Numbers[Math.floor(Math.random() * Numbers.length)]
         break
       case 3:
-        if (Symbol) Password += Symbols[Math.floor(Math.random() * Symbols.length)]
+        if (!Symbol) continue
+        Password += Symbols[Math.floor(Math.random() * Symbols.length)]
         break
     }
   }

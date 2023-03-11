@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 html body {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 300vh;
 
     background-color: transparent;
     color: #ffffff;
@@ -17,41 +17,38 @@ html body {
     margin: 0;
 }
 
-header {
-    display: flex;
-    background-color: rgb(32, 32, 32);
+main {
+    overflow: hidden;
+    border-radius: 8px;
+}
 
-    -webkit-app-region: drag;
+.Footer,
+.Header{
+    display: flex;
     overflow: hidden;
 
-    border-radius: 8px 8px 0px 0px;
-}
-
-header input:first-of-type {
-    margin-left: auto;
-}
-
-header input {
-    border: none;
-
-    width: 30px;
-    height: 30px;
-
     background-color: rgb(32, 32, 32);
-    color: #ffffff;
+    height: 30px;
+}
 
+.Header input, 
+.Footer input {
+    background-color: transparent;
+}
+
+.Header {
+    -webkit-app-region: drag;
+}
+
+.Footer {
     -webkit-app-region: none;
 }
 
-header input:hover {
-    background-color: rgb(40, 40, 40);
+.Header input:first-of-type {
+    margin-left: auto;
 }
 
-header input:active {
-    background-color: rgb(48, 48, 48);
-}
-
-header img {
+.Header img {
     width: 20px;
     height: 20px;
 
@@ -61,68 +58,130 @@ header img {
     margin-right: 5px;
 }
 
-header p {
+.Header p {
     margin-top: auto;
     margin-bottom: auto;
 
     padding: 0;
 }
 
-main {
+.Content {
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+
+    height: 240px;
+    padding: 10px;
 
     background-color: rgb(24, 24, 24);
 
     font-size: 12px;
 }
 
-main input:first-of-type {
-    margin-bottom: 5px;
+.Content input {
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 10px;
 }
 
-main input {
+input {
     border: none;
-    border-radius: 8px;
-
     outline: none;
 
-    background-color: rgb(40, 40, 40);
+    -webkit-app-region: none;
+
+    background-color: rgba(255, 255, 255, 0.05);
     color: rgb(255, 255, 255);
 
     height: 30px;
-    margin: 5px;
 }
 
-main input:hover {
-    background-color: rgb(48, 48, 48);
+input:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-main input:active {
-    background-color: rgb(56, 56, 56);
+input:active {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
-main input[type='text'] {
-    text-align: center;
-}
-
-main label {
-    margin: 5px;
-}
-
-footer {
+.column {
     display: flex;
-
-    background-color: rgb(32, 32, 32);
-    border-radius: 0px 0px 8px 8px;
-
-    height: 30px;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
 }
 
-footer input {
-    width: 24px;
-    height: 24px;
-
-    margin-top: auto;
-    margin-bottom: auto;
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
 }
+
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 12px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+  
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+  
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+  
+.container:hover input ~ .checkmark {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+  
+.container input:checked ~ .checkmark {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.container input:hover ~ .checkmark {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+
+    width: 5px;
+    height: 10px;
+
+    border: solid white;
+    border-width: 0 3px 3px 0;
+
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+} 

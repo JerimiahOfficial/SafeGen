@@ -9,41 +9,57 @@
     </head>
 
     <body>
-        <header>
-            <img src="../images/safegen.png" alt="sg" />
-
-            <p>SafeGen</p>
-
-            <input type="button" value="_" id="Hide" />
-            <input type="button" value="✕" id="Exit" />
-        </header>
-
         <main>
-            <input type="text" name="Password" id="Password" readonly />
-            <input type="button" value="Generate" id="Generate" />
+            <div class="Header">
+                <img src="../images/safegen.svg" alt="safegen" />
 
-            <label id="PassLen" for="length">Password Length: 10</label>
-            <input id="length" type="range" min="10" max="50" value="10" />
+                <p>SafeGen</p>
 
-            <div>
-                <input type="checkbox" id="Upper" checked />
-                <label for="Upper">A-Z</label>
-
-                <input type="checkbox" id="Lower" checked />
-                <label for="Lower">a-z</label>
+                <input type="image" src="../images/minus.svg" id="Hide" />
+                <input type="image" src="../images/cross.svg" id="Exit" />
             </div>
 
-            <div>
-                <input type="checkbox" id="Number" checked />
-                <label for="Number">0-9</label>
+            <div class="Content">
+                <input type="text" name="Password" id="Password" readonly />
+                <input type="button" value="Generate" id="Generate" />
 
-                <input type="checkbox" id="Symbol" checked />
-                <label for="Symbol">!@#$%^&*</label>
+                <label id="PassLen" for="length">Password Length: 10</label>
+                <input id="length" type="range" min="10" max="50" value="10" />
+
+                <div class="row">
+                    <div class="column">
+                        <div>
+                            <label class="container">A-Z
+                                <input type="checkbox" id="Upper" checked>
+                                <span class="checkmark"></span>
+                            </label>
+                            
+                            <label class="container">a-z
+                                <input type="checkbox" id="Lower" checked>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+    
+                    <div class="column">
+                        <div>
+                            <label class="container">0-9
+                                <input type="checkbox" id="Number" checked>
+                                <span class="checkmark"></span>
+                            </label>
+                            
+                            <label class="container">!@#$%^&*
+                                <input type="checkbox" id="Symbol" checked>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="Footer">
+                <input type="image" src="../images/github.svg" id="Github" />
             </div>
         </main>
-
-        <footer>
-            <input type="image" src="../images/Github.png" id="Github" />
-        </footer>
     </body>
 </html>
