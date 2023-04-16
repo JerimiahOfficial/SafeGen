@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/JerimiahOfficial/SafeGen#readme",
   "dependencies": {
-    "electron": "^22.3.5"
+    "electron": "^22.3.6"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.57.0",
