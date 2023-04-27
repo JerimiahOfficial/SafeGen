@@ -1,10 +1,5 @@
 import { app, BrowserWindow, ipcMain, shell } from 'electron'
-import { join } from 'node:path'
-
-const UpperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-const LowerCase = 'abcdefghijklmnopqrstuvwxyz'
-const Numbers = '0123456789'
-const Symbols = '!@#$%^&*'
+import { join } from 'path'
 
 let window: BrowserWindow | null
 
@@ -28,7 +23,6 @@ function CreateWindow (): void {
 
   window.setMenuBarVisibility(false)
   window.setMenu(null)
-
   void window.loadFile(join(__dirname, '/html/ui.html'))
 
   window.once('ready-to-show', () => {
@@ -65,30 +59,27 @@ ipcMain.on('Github', () => {
 })
 
 // Handlers
+const UpperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const LowerCase = 'abcdefghijklmnopqrstuvwxyz'
+const Numbers = '0123456789'
+const Symbols = '!@#$%^&*'
+const Characters = UpperCase + LowerCase + Numbers + Symbols
+
 ipcMain.handle('Generate', (_event, length: number, Upper: boolean, Lower: boolean, Number: boolean, Symbol: boolean) => {
   let Password = ''
 
   while (Password.length < length) {
-    switch (Math.floor(Math.random() * 4)) {
-      case 0:
-        if (!Upper) continue
-        Password += UpperCase[Math.floor(Math.random() * UpperCase.length)]
-        break
-      case 1:
-        if (!Lower) continue
-        Password += LowerCase[Math.floor(Math.random() * LowerCase.length)]
-        break
-      case 2:
-        if (!Number) continue
-        Password += Numbers[Math.floor(Math.random() * Numbers.length)]
-        break
-      case 3:
-        if (!Symbol) continue
-        Password += Symbols[Math.floor(Math.random() * Symbols.length)]
+    const Character = Characters[Math.floor(Math.random() * Characters.length)]
+
+    switch (true) {
+      case Upper && Character === Character.toUpperCase():
+      case Lower && Character === Character.toLowerCase():
+      case Number && Numbers.includes(Character):
+      case Symbol && Symbols.includes(Character):
+        Password += Character
         break
     }
   }
 
-  Password = Password.slice(0, length)
-  return Password.split('').sort(() => Math.random() - 0.5).join('')
+  return Password.slice(0, length).split('').sort(() => Math.random() - 0.5).join('')
 })
