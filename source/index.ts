@@ -1,5 +1,5 @@
 import { app, BrowserWindow, ipcMain, shell } from 'electron'
-import { join } from 'path'
+import { join } from 'node:path'
 
 let window: BrowserWindow | null
 
