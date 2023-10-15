@@ -13,7 +13,6 @@ function CreateWindow (): void {
     show: false,
     frame: false,
     autoHideMenuBar: true,
-    transparent: true,
     webPreferences: {
       contextIsolation: true,
       devTools: true,
