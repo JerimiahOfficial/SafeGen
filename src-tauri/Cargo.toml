@@ -1,0 +1,18 @@
+[package]
+name = "safe-gen"
+version = "0.0.1"
+description = "A Tauri App"
+authors = ["you"]
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "1", features = [] }
+
+[dependencies]
+tauri = { version = "1", features = ["shell-open"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+rand = "0.*"
+
+[features]
+custom-protocol = ["tauri/custom-protocol"]
